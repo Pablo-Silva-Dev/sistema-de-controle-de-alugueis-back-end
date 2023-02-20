@@ -10,7 +10,6 @@ export class CreateOrderController {
             client_cnpj,
             rent_date_start,
             rent_date_return,
-            voucher_code,
             total,
             items
         } = req.body
@@ -22,7 +21,6 @@ export class CreateOrderController {
             client_cnpj,
             rent_date_start,
             rent_date_return,
-            voucher_code,
             total,
             items
         })

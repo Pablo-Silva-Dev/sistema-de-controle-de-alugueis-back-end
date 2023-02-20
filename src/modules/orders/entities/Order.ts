@@ -2,6 +2,7 @@ import { Entity, Column, CreateDateColumn, PrimaryColumn, ManyToOne, JoinColumn 
 import { Client } from '../../clients/entities/clients'
 import { IItem } from '../../items/repositories/interfaces/item'
 import { v4 as uuidv4 } from 'uuid'
+import { generateVoucherCode } from '../../../shared/utils/generateVoucher';
 
 
 @Entity('orders')
@@ -30,7 +31,7 @@ class Order {
     @Column()
     total: number
 
-    @Column("jsonb", {nullable: true})
+    @Column("jsonb", { nullable: true })
     items: IItem[]
 
     @ManyToOne(() => Client)
@@ -49,6 +50,9 @@ class Order {
     constructor() {
         if (!this.id) {
             this.id = uuidv4()
+        }
+        if (!this.voucher_code) {
+            this.voucher_code = generateVoucherCode()
         }
     }
 

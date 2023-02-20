@@ -8,7 +8,6 @@ export interface IOrdersRepository {
         client_cnpj,
         rent_date_start,
         rent_date_return,
-        voucher_code,
         total
     }: IOrder): Promise<void>
     list(itemsPerPage?: number, page?: number): Promise<IOrder[]>

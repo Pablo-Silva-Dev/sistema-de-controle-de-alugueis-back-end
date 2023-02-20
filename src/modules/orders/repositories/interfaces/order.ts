@@ -6,7 +6,7 @@ interface IOrderItem{
 
 export interface IOrder{
     id?: string;
-    voucher_code: string;
+    voucher_code?: string;
     client_name:string;
     client_cpf?:string;
     client_cnpj?:string;
