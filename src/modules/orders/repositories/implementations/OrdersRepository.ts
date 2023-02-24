@@ -79,7 +79,8 @@ export class OrdersRepository implements IOrdersRepository {
     async listOrdersByClient(client_id: string): Promise<IOrder[]> {
         const orders = await this.repository.find({
             where: { client_id },
-            relations: ['client']
+            relations: ['client'],
+
         })
         return orders
     }
@@ -89,14 +90,20 @@ export class OrdersRepository implements IOrdersRepository {
         return order
     }
 
-    async listOrdersByPeriod(periodInDays: number): Promise<IOrder[]> {
+    async listOrdersByPeriod(
+        periodInDays: number,
+        itemsPerPage: number,
+        page: number
+    ): Promise<IOrder[]> {
         const today = dayjs().toDate()
         const startPeriodDate = dayjs(today).subtract(periodInDays, 'day').toDate()
 
         const orders = await this.repository.find({
             where: {
-                created_at: MoreThan(new Date(startPeriodDate))
-            }
+                created_at: MoreThan(new Date(startPeriodDate)),
+            },
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage
         })
         return orders
     }

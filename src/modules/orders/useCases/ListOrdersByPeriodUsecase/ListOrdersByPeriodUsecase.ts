@@ -9,8 +9,12 @@ export class ListOrdersByPeriodUsecase {
         private ordersRepository: OrdersRepository,
     ) { }
 
-    async execute(periodInDays: number): Promise<IOrder[]> {
-        const orders = await this.ordersRepository.listOrdersByPeriod(periodInDays)
+    async execute(
+        periodInDays: number,
+        itemsPerPage: number,
+        page: number
+): Promise<IOrder[]> {
+        const orders = await this.ordersRepository.listOrdersByPeriod(periodInDays, itemsPerPage, page)
         return orders
     }
 

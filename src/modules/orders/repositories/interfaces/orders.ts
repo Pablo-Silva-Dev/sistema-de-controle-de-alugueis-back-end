@@ -12,7 +12,11 @@ export interface IOrdersRepository {
     }: IOrder): Promise<void>
     list(itemsPerPage?: number, page?: number): Promise<IOrder[]>
     listOrdersByClient(client_id: string): Promise<IOrder[]>
-    listOrdersByPeriod(periodInDays: number, finalDate: Date): Promise<IOrder[]>;
+    listOrdersByPeriod(
+        periodInDays: number,
+        itemsPerPage: number,
+        page: number
+    ): Promise<IOrder[]>;
     findByVoucherCode(voucher_code: string): Promise<IOrder>;
     findById(id: string): Promise<IOrder>
     delete(id: string): Promise<void>
