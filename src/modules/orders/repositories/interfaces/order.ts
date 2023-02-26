@@ -10,6 +10,15 @@ export interface IOrder{
     client_name:string;
     client_cpf?:string;
     client_cnpj?:string;
+    client_email: string;
+    client_phone: string;
+    client_address_neighborhood: string;
+    client_address_street: string;
+    client_address_residence_number: string;
+    client_address_complement: string;
+    client_address_cep: string;
+    client_address_city: string;
+    client_address_reference_point?: string;
     rent_date_start: Date;
     rent_date_return?: Date;
     total: number;

@@ -22,6 +22,33 @@ class Order {
     @Column()
     client_cnpj?: string
 
+    @Column()
+    client_phone: string
+
+    @Column()
+    client_email: string
+
+    @Column()
+    client_address_cep: string
+
+    @Column()
+    client_address_city: string
+
+    @Column()
+    client_address_complement: string
+
+    @Column()
+    client_address_neighborhood: string
+
+    @Column()
+    client_address_residence_number: string
+
+    @Column()
+    client_address_street: string
+
+    @Column()
+    client_address_reference_point?: string
+
     @CreateDateColumn()
     rent_date_start: Date;
 
