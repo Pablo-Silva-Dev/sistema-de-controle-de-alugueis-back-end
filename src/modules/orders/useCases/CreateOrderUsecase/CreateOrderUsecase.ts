@@ -1,14 +1,17 @@
 import { inject, injectable } from 'tsyringe'
 import { IOrdersRepository } from '../../repositories/interfaces/orders'
 import { IOrder } from '../../repositories/interfaces/order'
-
+import { DateProvider } from '../../../../shared/providers/DateProvider/implementations/DateProvider'
 @injectable()
 export class CreateOrderUsecase {
     constructor(
         @inject('OrdersRepository')
-        private ordersRepository: IOrdersRepository
+        private ordersRepository: IOrdersRepository,
+        @inject('DateProvider')
+        private dateProvider : DateProvider
     ) { }
 
+    
     async execute({
         client_id,
         client_cnpj,
@@ -25,6 +28,8 @@ export class CreateOrderUsecase {
         client_address_street,
         rent_date_return,
         rent_date_start,
+        days_to_expire_rent = this.dateProvider.dateDifference(rent_date_return, rent_date_start),
+        finished = false,
         total,
         items
     }: IOrder): Promise<void> {
@@ -44,6 +49,8 @@ export class CreateOrderUsecase {
             client_address_street,
             rent_date_start,
             rent_date_return,
+            days_to_expire_rent,
+            finished,
             total,
             items
         })

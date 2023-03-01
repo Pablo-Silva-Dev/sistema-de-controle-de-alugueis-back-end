@@ -49,6 +49,12 @@ class Order {
     @Column()
     client_address_reference_point?: string
 
+    @Column()
+    days_to_expire_rent: number
+
+    @Column()
+    finished: boolean
+
     @CreateDateColumn()
     rent_date_start: Date;
 

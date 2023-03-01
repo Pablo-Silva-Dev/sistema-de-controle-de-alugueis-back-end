@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 import { CreateOrderUsecase } from './CreateOrderUsecase'
@@ -23,6 +24,13 @@ export class CreateOrderController {
             items
         } = req.body
         const createOrderUsecase = container.resolve(CreateOrderUsecase)
+        
+        const finished = false
+       
+        const startDate = dayjs(new Date(rent_date_start))
+        const endDate = dayjs(new Date(rent_date_return))
+        const days_to_expire_rent =  endDate.diff(startDate, 'days')
+
         await createOrderUsecase.execute({
             client_id,
             client_name,
@@ -40,6 +48,8 @@ export class CreateOrderController {
             rent_date_start,
             rent_date_return,
             total,
+            finished,
+            days_to_expire_rent,
             items
         })
         return res.status(201).json({ "message": "Order created with success" })
