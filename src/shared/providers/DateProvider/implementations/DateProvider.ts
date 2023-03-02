@@ -38,9 +38,12 @@ export class DateProvider implements IDateProvider {
         return isBefore
     }
     dateDifference(start_date: Date, end_date: Date): number {
-        const startDate = dayjs(new Date(start_date))
-        const endDate = dayjs(new Date(end_date))
+        const startDate = dayjs(start_date)
+        const endDate = dayjs(end_date)
         return endDate.diff(startDate, 'days')
     }
-
+    daysToExpireRent(end_date: Date): number {
+        const endDate = dayjs(end_date)
+        return endDate.diff(new Date(), 'days')
+    }
 }

@@ -18,9 +18,10 @@ export interface IOrder{
     client_address_complement: string;
     client_address_cep: string;
     client_address_city: string;
-    days_to_expire_rent: number;
-    finished: boolean;
     client_address_reference_point?: string;
+    days_to_expire_rent: number;
+    total_days: number;
+    finished: boolean;
     rent_date_start: Date;
     rent_date_return?: Date;
     total: number;

@@ -31,11 +31,12 @@ export class OrdersRepository implements IOrdersRepository {
         client_address_reference_point,
         client_address_residence_number,
         client_address_street,
+        voucher_code,
         rent_date_start,
+        rent_date_return,
+        total_days,
         days_to_expire_rent,
         finished,
-        rent_date_return,
-        voucher_code,
         total,
         items
     }: IOrder): Promise<void> {
@@ -52,12 +53,13 @@ export class OrdersRepository implements IOrdersRepository {
             client_address_neighborhood,
             client_address_reference_point,
             client_address_residence_number,
-            days_to_expire_rent,
-            finished,
             client_address_street,
+            voucher_code,
             rent_date_start,
             rent_date_return,
-            voucher_code,
+            total_days,
+            days_to_expire_rent,
+            finished,
             total,
             items
         })

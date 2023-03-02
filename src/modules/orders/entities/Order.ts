@@ -14,6 +14,9 @@ class Order {
     voucher_code: string
 
     @Column()
+    client_id: string
+
+    @Column()
     client_name: string
 
     @Column()
@@ -50,19 +53,22 @@ class Order {
     client_address_reference_point?: string
 
     @Column()
-    days_to_expire_rent: number
-
-    @Column()
     finished: boolean
-
+    
     @CreateDateColumn()
     rent_date_start: Date;
-
+    
     @CreateDateColumn()
     rent_date_return?: Date;
-
+    
     @Column()
     total: number
+    
+    @Column()
+    days_to_expire_rent: number
+    
+    @Column()
+    total_days: number
 
     @Column("jsonb", { nullable: true })
     items: IItem[]
@@ -70,9 +76,6 @@ class Order {
     @ManyToOne(() => Client)
     @JoinColumn({ name: 'client_id' })
     client: Client
-
-    @Column()
-    client_id: string
 
     @CreateDateColumn()
     created_at?: Date;

@@ -23,14 +23,14 @@ export class CreateOrderController {
             total,
             items
         } = req.body
-        const createOrderUsecase = container.resolve(CreateOrderUsecase)
         
         const finished = false
-       
-        const startDate = dayjs(new Date(rent_date_start))
-        const endDate = dayjs(new Date(rent_date_return))
-        const days_to_expire_rent =  endDate.diff(startDate, 'days')
-
+        const startDate = dayjs(rent_date_start)
+        const endDate = dayjs(rent_date_return)
+        const total_days =  endDate.diff(startDate, 'days')
+        const days_to_expire_rent = endDate.diff(new Date(), 'days')
+        
+        const createOrderUsecase = container.resolve(CreateOrderUsecase)
         await createOrderUsecase.execute({
             client_id,
             client_name,
@@ -50,6 +50,7 @@ export class CreateOrderController {
             total,
             finished,
             days_to_expire_rent,
+            total_days,
             items
         })
         return res.status(201).json({ "message": "Order created with success" })

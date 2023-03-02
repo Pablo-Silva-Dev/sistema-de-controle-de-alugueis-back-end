@@ -16,6 +16,7 @@ export interface IOrdersRepository {
         client_address_residence_number,
         client_address_street,
         days_to_expire_rent,
+        total_days,
         finished,
         rent_date_start,
         rent_date_return,
