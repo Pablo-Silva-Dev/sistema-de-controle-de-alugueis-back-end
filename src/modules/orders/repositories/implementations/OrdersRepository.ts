@@ -1,4 +1,10 @@
-import { getRepository, Repository, MoreThan } from 'typeorm'
+import {
+    getRepository,
+    Repository,
+    MoreThan,
+    LessThan,
+    Between
+ } from 'typeorm'
 import dayjs from 'dayjs'
 import { Order } from '../../entities/Order'
 import { IOrder, IUpdateOrder } from '../interfaces/order'
@@ -9,6 +15,7 @@ export class OrdersRepository implements IOrdersRepository {
     public constructor() {
         this.repository = getRepository(Order)
     }
+
     async update({
         id,
         rent_date_return,
@@ -90,6 +97,139 @@ export class OrdersRepository implements IOrdersRepository {
 
         return orders
     }
+
+    async listFinishedOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]> {
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                finished: true
+            }
+        })
+
+
+        const orders = await this.repository.find({
+            where: {
+                finished: true
+            }
+        })
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
+        return orders
+    }
+
+    async listActiveOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]> {
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                finished: false
+            }
+        })
+
+
+        const orders = await this.repository.find({
+            where: {
+                finished: false
+            }
+        })
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
+        return orders
+    }
+
+    async listLateOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]> {
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                days_to_expire_rent: LessThan(0),
+                finished: false,
+            }
+        })
+
+
+        const orders = await this.repository.find({
+            where: {
+                days_to_expire_rent: LessThan(0),
+                finished: false,
+            }
+        })
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
+        return orders
+    }
+    async listNextToExpireOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]> {
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                days_to_expire_rent: Between(0, 10),
+                finished: false,
+            }
+        })
+
+
+        const orders = await this.repository.find({
+            where: {
+                days_to_expire_rent: Between(0, 10),
+                finished: false,
+            }
+        })
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
+        return orders
+    }
+
+
 
     async findById(id: string): Promise<IOrder> {
         const order = await this.repository.findOne({ id })

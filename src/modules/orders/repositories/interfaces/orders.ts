@@ -23,6 +23,10 @@ export interface IOrdersRepository {
         total
     }: IOrder): Promise<void>
     list(itemsPerPage?: number, page?: number): Promise<IOrder[]>
+    listFinishedOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
+    listActiveOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
+    listLateOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
+    listNextToExpireOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
     listOrdersByClient(client_id: string): Promise<IOrder[]>
     listOrdersByPeriod(
         periodInDays: number,
