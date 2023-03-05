@@ -4,7 +4,7 @@ import {
     MoreThan,
     LessThan,
     Between
- } from 'typeorm'
+} from 'typeorm'
 import dayjs from 'dayjs'
 import { Order } from '../../entities/Order'
 import { IOrder, IUpdateOrder } from '../interfaces/order'
@@ -269,6 +269,82 @@ export class OrdersRepository implements IOrdersRepository {
             take: itemsPerPage,
             skip: (page - 1) * itemsPerPage
         })
+        return orders
+    }
+
+    async listOrdersByPeriodAndStatus(
+        periodInDays: number,
+        status: string,
+        itemsPerPage: number,
+        page: number,
+    ): Promise<IOrder[]> {
+        const today = dayjs().toDate()
+        const startPeriodDate = dayjs(today).subtract(periodInDays, 'day').toDate()
+
+        const orders = await this.repository.find({
+            where: {
+                created_at: MoreThan(startPeriodDate),
+            },
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage
+        })
+
+        const nextToExpireOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                created_at: MoreThan(startPeriodDate),
+                days_to_expire_rent: Between(0, 10),
+                finished: false,
+            }
+        })
+
+        const lateOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                created_at: MoreThan(startPeriodDate),
+                days_to_expire_rent: LessThan(0),
+                finished: false,
+            }
+        })
+
+
+        const finishedOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                created_at: MoreThan(startPeriodDate),
+                finished: true
+            }
+        })
+
+
+        const activeOrders = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                created_at: MoreThan(startPeriodDate),
+                finished: false
+            }
+        })
+
+        if(status === 'activeOrders'){
+            return activeOrders
+        }
+
+        if(status === 'finishedOrders'){
+            return finishedOrders
+        }
+
+        if(status === 'lateOrders'){
+            return lateOrders
+        }
+
+        if(status === 'nextToExpireOrders'){
+            return nextToExpireOrders
+        }
+
         return orders
     }
 }

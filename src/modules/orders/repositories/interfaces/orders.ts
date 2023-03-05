@@ -33,6 +33,12 @@ export interface IOrdersRepository {
         itemsPerPage: number,
         page: number
     ): Promise<IOrder[]>;
+    listOrdersByPeriodAndStatus(
+        periodInDays: number,
+        status: string,
+        itemsPerPage: number,
+        page: number
+    ): Promise<IOrder[]>;
     findByVoucherCode(voucher_code: string): Promise<IOrder>;
     findById(id: string): Promise<IOrder>
     delete(id: string): Promise<void>
