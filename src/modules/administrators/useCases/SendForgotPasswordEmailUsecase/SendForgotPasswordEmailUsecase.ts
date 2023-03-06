@@ -46,5 +46,10 @@ export class SendForgotPasswordEmailUsecase {
             variables as any,
             templatePath
         )
+
+        return {
+            email: adm.email,
+            recoveryCode
+        }
     }
 }

@@ -1,3 +1,8 @@
+export interface IMailProviderResponse{
+    email: string;
+    recoveryCode?: string;
+}
+
 export interface IMailProvider {
     sendEmail(
         from: string,
@@ -5,5 +10,5 @@ export interface IMailProvider {
         subject: string,
         variables?: any,
         templatePath?: string
-    ): Promise<void>
+    ): Promise<IMailProviderResponse>
 }
