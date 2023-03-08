@@ -18,11 +18,11 @@ const updateAdmController = new UpdateAdmController()
 const authenticateAdmController = new AuthenticateAdmController()
 const sendForgotPasswordEmailController = new SendForgotPasswordEmailController()
 
-administratorsRoutes.post('/create', ensureAuthenticated, createAdmController.handle)
+administratorsRoutes.post('/create', createAdmController.handle)
 administratorsRoutes.post('/auth', authenticateAdmController.handle)
 administratorsRoutes.get('/list', ensureAuthenticated, listAdmsController.handle)
 administratorsRoutes.delete('/:id', ensureAuthenticated, deleteAdmController.handle)
-administratorsRoutes.put('/', ensureAuthenticated, updateAdmController.handle)
+administratorsRoutes.put('/', updateAdmController.handle)
 administratorsRoutes.post('/redefine-password', sendForgotPasswordEmailController.handle)
 
 export { administratorsRoutes };

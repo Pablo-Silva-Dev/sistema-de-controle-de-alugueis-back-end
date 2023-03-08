@@ -15,6 +15,12 @@ interface IAuthenticationResponse {
     token: string
 }
 
+interface IRequest {
+    email: string
+    password: string
+}
+
+
 @injectable()
 export class AuthenticateAdmUsecase {
     constructor(
@@ -26,7 +32,7 @@ export class AuthenticateAdmUsecase {
         private dateProvider: DateProvider
     ) { }
 
-    async execute({ email, password }): Promise<IAuthenticationResponse> {
+    async execute({ email, password } : IRequest): Promise<IAuthenticationResponse> {
         const administrator = await this.administratorsRepository.findByEmail(email);
 
         if (!administrator) {
