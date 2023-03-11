@@ -12,6 +12,7 @@ import { ListActiveOrdersController } from '../../../../modules/orders/useCases/
 import { ListLateOrdersController } from '../../../../modules/orders/useCases/ListLateOrders/ListLateOrdersController'
 import { ListNextToExpireOrdersController } from '../../../../modules/orders/useCases/ListNextToExpireOrders/ListLateOrdersController'
 import { ListOrdersByPeriodAndStatusController } from '../../../../modules/orders/useCases/ListOrdersByPeriodAndStatusUsecase/ListOrdersByPeriodAndStatusController'
+import { FinishOrderController } from '../../../../modules/orders/useCases/FinishOrderUsecase/FinishOrderController'
 
 export const orderRoutes = Router()
 
@@ -27,6 +28,7 @@ const listFinishedOrdersController = new ListFinishedOrdersController()
 const listActiveOrdersController = new ListActiveOrdersController()
 const listLateOrdersController = new ListLateOrdersController()
 const listNextToExpireOrdersController = new ListNextToExpireOrdersController()
+const finishOrderController = new FinishOrderController()
 
 orderRoutes.post('/create', ensureAuthenticated, createOrderController.handle)
 orderRoutes.get('/list', ensureAuthenticated, listOrdersController.handle)
@@ -40,3 +42,4 @@ orderRoutes.get('/list-by-period-and-status', ensureAuthenticated, listOrdersByP
 orderRoutes.get('/:voucher_code', ensureAuthenticated, findOrderByVoucherCodeController.handle)
 orderRoutes.delete('/:id', ensureAuthenticated, deleteOrderController.handle)
 orderRoutes.put('/:id', ensureAuthenticated, updateOrderController.handle)
+orderRoutes.put('/finish/:id', ensureAuthenticated, finishOrderController.handle)

@@ -1,4 +1,4 @@
-import { IOrder, IUpdateOrder } from "./order";
+import { IFinishOrder, IOrder, IUpdateOrder } from "./order";
 
 export interface IOrdersRepository {
     create({
@@ -47,4 +47,5 @@ export interface IOrdersRepository {
         rent_date_start,
         total
     }: IUpdateOrder): Promise<void>
+    finishOrder({ id }: IFinishOrder): Promise<void>
 }

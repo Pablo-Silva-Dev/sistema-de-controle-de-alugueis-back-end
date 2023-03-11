@@ -35,3 +35,6 @@ export interface IUpdateOrder{
     rent_date_return?: Date;
     total?: number;
 }
+export interface IFinishOrder{
+    id: string;
+}
