@@ -9,9 +9,9 @@ export class CreateItemUsecase {
         private itemsRepository: ItemsRepository
     ) { }
 
-    async execute({ description, price, quantity }: IItem): Promise<void> {
+    async execute({ description, price, stock }: IItem): Promise<void> {
         await this.itemsRepository.create({
-            description, price, quantity
+            description, price, stock
         })
     }
 }

@@ -5,6 +5,12 @@ export interface IUpdateItem {
     price: number;
     quantity?: number;
 }
+
+export interface IUpdateItemStatus{
+    id: string;
+    stock: number;
+}
+
 export interface IItemsRepository {
     create(data: IItem): Promise<void>;
     list(itemsPerPage?: number, page?: number): Promise<IItem[]>;
@@ -14,4 +20,8 @@ export interface IItemsRepository {
         description,
         price,
     }: IUpdateItem): Promise<void>
+    updateItemStock({
+        id,
+        stock,
+    }: IUpdateItemStatus): Promise<void>
 }

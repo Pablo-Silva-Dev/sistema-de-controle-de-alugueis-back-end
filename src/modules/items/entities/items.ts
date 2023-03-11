@@ -15,6 +15,12 @@ class Item {
     @Column()
     quantity?: number;
 
+    @Column()
+    stock: number;
+
+    @Column()
+    available_for_rent: boolean;
+
     @CreateDateColumn()
     created_at?: Date;
 

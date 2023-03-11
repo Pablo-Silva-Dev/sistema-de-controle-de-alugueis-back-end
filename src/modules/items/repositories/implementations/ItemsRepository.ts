@@ -1,4 +1,4 @@
-import { IItemsRepository, IUpdateItem } from '../interfaces/items'
+import { IItemsRepository, IUpdateItem, IUpdateItemStatus } from '../interfaces/items'
 import { getRepository, Repository } from 'typeorm'
 import { IItem } from '../interfaces/item'
 import { Item } from '../../entities/items'
@@ -12,12 +12,12 @@ export class ItemsRepository implements IItemsRepository {
     async create({
         description,
         price,
-        quantity
+        stock
     }: IItem): Promise<void> {
         const item = await this.repository.create({
             description,
             price,
-            quantity
+            stock
         })
 
         await this.repository.save(item)
@@ -53,5 +53,9 @@ export class ItemsRepository implements IItemsRepository {
     }
     async update({ id, description, price, quantity }: IUpdateItem): Promise<void> {
         await this.repository.update(id, { description, price, quantity })
+    }
+
+    async updateItemStock({ id, stock }: IUpdateItemStatus): Promise<void> {
+        await this.repository.update(id, { stock })
     }
 }
