@@ -19,7 +19,7 @@ class Item {
     stock: number;
 
     @Column()
-    available_for_rent: boolean;
+    available_for_rent?: boolean;
 
     @CreateDateColumn()
     created_at?: Date;

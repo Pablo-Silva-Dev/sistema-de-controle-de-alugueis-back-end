@@ -27,6 +27,7 @@ export interface IOrder{
     total: number;
     client_id: string;
     items?: IOrderItem[]
+    divergence_justification?: string
 }
 
 export interface IUpdateOrder{
@@ -37,4 +38,5 @@ export interface IUpdateOrder{
 }
 export interface IFinishOrder{
     id: string;
+    divergence_justification?: string
 }

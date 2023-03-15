@@ -29,6 +29,12 @@ export class OrdersRepository implements IOrdersRepository {
         await this.repository.update(id, { finished: true })
     }
 
+    async finishOrderWithJustification({ id, divergence_justification }: IFinishOrder): Promise<void> {
+        await this.repository.update(id, {
+            finished: true,
+            divergence_justification: divergence_justification
+        })
+    }
 
     async create({
         client_id,
@@ -135,6 +141,41 @@ export class OrdersRepository implements IOrdersRepository {
 
         return orders
     }
+
+    async listFinishedWithJustificationOrders(
+        itemsPerPage?: number,
+        page?: number
+    ): Promise<IOrder[]> {
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedOrders = await this.repository.find({
+            where: {
+                divergence_justification: true
+            },
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage
+        })
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
+        const orders = await this.repository.find({
+            where: {
+                divergence_justification: true
+            }
+        })
+
+        return orders
+    }
+
 
     async listActiveOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]> {
 

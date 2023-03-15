@@ -69,9 +69,12 @@ class Order {
     
     @Column()
     total_days: number
-
+    
     @Column("jsonb", { nullable: true })
     items: IItem[]
+    
+    @Column()
+    divergence_justification?: string
 
     @ManyToOne(() => Client)
     @JoinColumn({ name: 'client_id' })

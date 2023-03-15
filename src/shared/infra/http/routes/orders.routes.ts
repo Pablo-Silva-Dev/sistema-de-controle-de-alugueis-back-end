@@ -13,6 +13,8 @@ import { ListLateOrdersController } from '../../../../modules/orders/useCases/Li
 import { ListNextToExpireOrdersController } from '../../../../modules/orders/useCases/ListNextToExpireOrders/ListLateOrdersController'
 import { ListOrdersByPeriodAndStatusController } from '../../../../modules/orders/useCases/ListOrdersByPeriodAndStatusUsecase/ListOrdersByPeriodAndStatusController'
 import { FinishOrderController } from '../../../../modules/orders/useCases/FinishOrderUsecase/FinishOrderController'
+import { ListFinishedWithJustificationOrdersController } from '../../../../modules/orders/useCases/ListFinishedOrders copy/ListFinishedWithJustificationOrdersController'
+import { FinishOrderWithJustificationController } from '../../../../modules/orders/useCases/FinishOrderWithJustificationUsecase/FinishOrderWithJustificationController'
 
 export const orderRoutes = Router()
 
@@ -25,21 +27,85 @@ const deleteOrderController = new DeleteOrderController()
 const updateOrderController = new UpdateOrderController()
 const findOrderByVoucherCodeController = new FindOrderByVoucherCodeController()
 const listFinishedOrdersController = new ListFinishedOrdersController()
+const listFinishedWithJustificationOrdersController = new ListFinishedWithJustificationOrdersController()
 const listActiveOrdersController = new ListActiveOrdersController()
 const listLateOrdersController = new ListLateOrdersController()
 const listNextToExpireOrdersController = new ListNextToExpireOrdersController()
 const finishOrderController = new FinishOrderController()
+const finishOrderWithJustificationController = new FinishOrderWithJustificationController()
 
-orderRoutes.post('/create', ensureAuthenticated, createOrderController.handle)
-orderRoutes.get('/list', ensureAuthenticated, listOrdersController.handle)
-orderRoutes.get('/list-finished', ensureAuthenticated, listFinishedOrdersController.handle)
-orderRoutes.get('/list-active', ensureAuthenticated, listActiveOrdersController.handle)
-orderRoutes.get('/list-late', ensureAuthenticated, listLateOrdersController.handle)
-orderRoutes.get('/list-next-to-expire', ensureAuthenticated, listNextToExpireOrdersController.handle)
-orderRoutes.get('/list/:client_id', ensureAuthenticated, listOrdersByClientController.handle)
-orderRoutes.get('/list-by-period', ensureAuthenticated, listOrdersByPeriodController.handle)
-orderRoutes.get('/list-by-period-and-status', ensureAuthenticated, listOrdersByPeriodAndStatusController.handle)
-orderRoutes.get('/:voucher_code', ensureAuthenticated, findOrderByVoucherCodeController.handle)
-orderRoutes.delete('/:id', ensureAuthenticated, deleteOrderController.handle)
-orderRoutes.put('/:id', ensureAuthenticated, updateOrderController.handle)
-orderRoutes.put('/finish/:id', ensureAuthenticated, finishOrderController.handle)
+orderRoutes.post(
+    '/create',
+    ensureAuthenticated,
+    createOrderController.handle
+)
+orderRoutes.get(
+    '/list',
+    ensureAuthenticated,
+    listOrdersController.handle
+)
+orderRoutes.get(
+    '/list-finished',
+    ensureAuthenticated,
+    listFinishedOrdersController.handle
+)
+orderRoutes.get(
+    '/list-finished-with-justification',
+    ensureAuthenticated,
+    listFinishedWithJustificationOrdersController.handle
+)
+orderRoutes.get(
+    '/list-active',
+    ensureAuthenticated,
+    listActiveOrdersController.handle
+)
+orderRoutes.get(
+    '/list-late',
+    ensureAuthenticated,
+    listLateOrdersController.handle
+)
+orderRoutes.get(
+    '/list-next-to-expire',
+    ensureAuthenticated,
+    listNextToExpireOrdersController.handle
+)
+orderRoutes.get(
+    '/list/:client_id',
+    ensureAuthenticated,
+    listOrdersByClientController.handle
+)
+orderRoutes.get(
+    '/list-by-period',
+    ensureAuthenticated,
+    listOrdersByPeriodController.handle
+)
+orderRoutes.get(
+    '/list-by-period-and-status',
+    ensureAuthenticated,
+    listOrdersByPeriodAndStatusController.handle
+)
+orderRoutes.get(
+    '/:voucher_code',
+    ensureAuthenticated,
+    findOrderByVoucherCodeController.handle
+)
+orderRoutes.delete(
+    '/:id',
+    ensureAuthenticated,
+    deleteOrderController.handle
+)
+orderRoutes.put(
+    '/:id',
+    ensureAuthenticated,
+    updateOrderController.handle
+)
+orderRoutes.put(
+    '/finish/:id',
+    ensureAuthenticated,
+    finishOrderController.handle
+)
+orderRoutes.put(
+    '/finish-with-justification/:id',
+    ensureAuthenticated,
+    finishOrderWithJustificationController.handle
+)
