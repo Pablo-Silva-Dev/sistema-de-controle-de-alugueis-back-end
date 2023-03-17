@@ -19,7 +19,7 @@ const findItemByIdController = new FindItemByIdController()
 
 itemsRoutes.post('/create', ensureAuthenticated, createItemController.handle)
 itemsRoutes.get('/list', ensureAuthenticated, listItemsController.handle)
-itemsRoutes.get('/find/:id', findItemByIdController.handle)
+itemsRoutes.get('/:id', findItemByIdController.handle)
 itemsRoutes.delete('/:id', ensureAuthenticated, deleteItemController.handle)
 itemsRoutes.put('/:id', ensureAuthenticated, updateItemController.handle)
 itemsRoutes.put('/stock/:id', ensureAuthenticated, updateItemStockController.handle)

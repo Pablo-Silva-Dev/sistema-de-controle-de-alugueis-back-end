@@ -4,4 +4,5 @@ export interface IItem {
     stock: number;
     available_for_rent?: boolean;
     quantity?: number;
+    description_long?: string;
 }

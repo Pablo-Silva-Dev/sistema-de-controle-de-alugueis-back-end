@@ -20,6 +20,9 @@ class Item {
 
     @Column()
     available_for_rent?: boolean;
+    
+    @Column()
+    description_long?: string;
 
     @CreateDateColumn()
     created_at?: Date;

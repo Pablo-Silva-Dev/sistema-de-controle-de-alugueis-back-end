@@ -11,11 +11,13 @@ export class ItemsRepository implements IItemsRepository {
 
     async create({
         description,
+        description_long,
         price,
         stock
     }: IItem): Promise<void> {
         const item = await this.repository.create({
             description,
+            description_long,
             price,
             stock
         })
