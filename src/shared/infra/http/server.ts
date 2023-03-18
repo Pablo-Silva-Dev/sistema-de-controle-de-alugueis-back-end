@@ -2,6 +2,8 @@ import 'reflect-metadata'
 import express, { json } from 'express';
 import 'express-async-errors'
 import cors from 'cors'
+import 'dotenv/config'
+
 
 import '../../../shared/database'
 import '../../containers'

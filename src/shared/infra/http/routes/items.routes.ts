@@ -1,3 +1,6 @@
+import multer from 'multer';
+import { multerConfig } from '../../../../config/multer'
+
 import { FindItemByIdController } from './../../../../modules/items/useCases/FindItemByIdUsecase/FindItemByIdController';
 import { Router } from 'express'
 import { CreateItemController } from '../../../../modules/items/useCases/CreateItemUsecase/CreateItemController'
@@ -9,6 +12,9 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const itemsRoutes = Router()
 
+const upload = multer({
+    storage: multerConfig
+})
 
 const createItemController = new CreateItemController()
 const listItemsController = new ListItemsController()
@@ -17,7 +23,12 @@ const updateItemController = new UpdateItemController()
 const updateItemStockController = new UpdateItemStockController()
 const findItemByIdController = new FindItemByIdController()
 
-itemsRoutes.post('/create', ensureAuthenticated, createItemController.handle)
+itemsRoutes.post(
+    '/create',
+    ensureAuthenticated,
+    upload.single('image'),
+    createItemController.handle
+)
 itemsRoutes.get('/list', ensureAuthenticated, listItemsController.handle)
 itemsRoutes.get('/:id', findItemByIdController.handle)
 itemsRoutes.delete('/:id', ensureAuthenticated, deleteItemController.handle)

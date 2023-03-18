@@ -13,13 +13,18 @@ export class ItemsRepository implements IItemsRepository {
         description,
         description_long,
         price,
-        stock
+        stock,
+        image
     }: IItem): Promise<void> {
+
+        const imageFullUrl = `${process.env.IMAGE_FULL_URL}/${image}`
+
         const item = await this.repository.create({
             description,
             description_long,
             price,
-            stock
+            stock,
+            image: imageFullUrl
         })
 
         await this.repository.save(item)

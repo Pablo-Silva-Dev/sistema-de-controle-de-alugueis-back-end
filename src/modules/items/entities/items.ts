@@ -24,6 +24,9 @@ class Item {
     @Column()
     description_long?: string;
 
+    @Column()
+    image?: string;
+
     @CreateDateColumn()
     created_at?: Date;
 
