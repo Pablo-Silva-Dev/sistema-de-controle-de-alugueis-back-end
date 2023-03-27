@@ -9,7 +9,13 @@ export class UpdateItemUsecase {
         private itemsRepository: IItemsRepository
     ) { }
 
-    async execute({ id, description, price, quantity }: IUpdateItem): Promise<void> {
+    async execute({
+        id,
+        description,
+        description_long,
+        price,
+        quantity
+    }: IUpdateItem): Promise<void> {
 
         const item = await this.itemsRepository.findById(id)
 
@@ -17,7 +23,13 @@ export class UpdateItemUsecase {
             throw new AppError(404, 'Item not found')
         }
 
-        await this.itemsRepository.update({ id, description, price, quantity })
+        await this.itemsRepository.update({
+            id,
+            description,
+            description_long,
+            price,
+            quantity
+        })
     }
 
 }

@@ -58,8 +58,19 @@ export class ItemsRepository implements IItemsRepository {
     async delete(id: string): Promise<void> {
         await this.repository.delete({ id })
     }
-    async update({ id, description, price, quantity }: IUpdateItem): Promise<void> {
-        await this.repository.update(id, { description, price, quantity })
+    async update({
+        id,
+        description,
+        description_long,
+        price,
+        quantity
+    }: IUpdateItem): Promise<void> {
+        await this.repository.update(id, {
+            description,
+            description_long,
+            price,
+            quantity
+        })
     }
 
     async updateItemStock({ id, stock }: IUpdateItemStatus): Promise<void> {

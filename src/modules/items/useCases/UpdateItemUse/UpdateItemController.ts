@@ -6,9 +6,11 @@ export class UpdateItemController {
     async handle(req: Request, res: Response): Promise<Response> {
         const {
             description,
+            description_long,
             price,
             quantity
         } = req.body
+
         const { id } = req.params
 
         const updateItemUsecase = container.resolve(UpdateItemUsecase)
@@ -16,6 +18,7 @@ export class UpdateItemController {
         await updateItemUsecase.execute({
             id,
             description,
+            description_long,
             price,
             quantity
         })

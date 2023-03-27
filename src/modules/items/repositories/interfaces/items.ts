@@ -2,6 +2,7 @@ import { IItem } from "./item";
 export interface IUpdateItem {
     id: string
     description: string;
+    description_long: string;
     price: number;
     quantity?: number;
 }
@@ -18,6 +19,7 @@ export interface IItemsRepository {
     delete(id: string): Promise<void>
     update({
         description,
+        description_long,
         price,
     }: IUpdateItem): Promise<void>
     updateItemStock({
