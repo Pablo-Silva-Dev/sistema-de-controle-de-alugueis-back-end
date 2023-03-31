@@ -13,8 +13,9 @@ import { ListLateOrdersController } from '../../../../modules/orders/useCases/Li
 import { ListNextToExpireOrdersController } from '../../../../modules/orders/useCases/ListNextToExpireOrders/ListLateOrdersController'
 import { ListOrdersByPeriodAndStatusController } from '../../../../modules/orders/useCases/ListOrdersByPeriodAndStatusUsecase/ListOrdersByPeriodAndStatusController'
 import { FinishOrderController } from '../../../../modules/orders/useCases/FinishOrderUsecase/FinishOrderController'
-import { ListFinishedWithJustificationOrdersController } from '../../../../modules/orders/useCases/ListFinishedOrders copy/ListFinishedWithJustificationOrdersController'
+import { ListFinishedWithJustificationOrdersController } from '../../../../modules/orders/useCases/ListFinishedWithJustificationOrdersUsecase/ListFinishedWithJustificationOrdersController'
 import { FinishOrderWithJustificationController } from '../../../../modules/orders/useCases/FinishOrderWithJustificationUsecase/FinishOrderWithJustificationController'
+import { UpdateOrderTimeController } from '../../../../modules/orders/systemUseCases/UpdateOrderTimeController'
 
 export const orderRoutes = Router()
 
@@ -33,6 +34,7 @@ const listLateOrdersController = new ListLateOrdersController()
 const listNextToExpireOrdersController = new ListNextToExpireOrdersController()
 const finishOrderController = new FinishOrderController()
 const finishOrderWithJustificationController = new FinishOrderWithJustificationController()
+const updateOrderTimeController = new UpdateOrderTimeController()
 
 orderRoutes.post(
     '/create',
@@ -93,6 +95,10 @@ orderRoutes.delete(
     '/:id',
     ensureAuthenticated,
     deleteOrderController.handle
+)
+orderRoutes.put(
+    '/update-orders-return-date',
+    updateOrderTimeController.handle
 )
 orderRoutes.put(
     '/:id',

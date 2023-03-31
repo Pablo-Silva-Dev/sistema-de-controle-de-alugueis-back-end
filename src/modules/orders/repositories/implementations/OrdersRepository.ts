@@ -15,6 +15,9 @@ export class OrdersRepository implements IOrdersRepository {
     public constructor() {
         this.repository = getRepository(Order)
     }
+   async updateTime(id: string, days_to_expire_rent: number): Promise<void> {
+        await this.repository.update(id, {days_to_expire_rent})
+    }
 
     async update({
         id,

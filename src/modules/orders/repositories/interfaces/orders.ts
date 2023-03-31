@@ -48,5 +48,6 @@ export interface IOrdersRepository {
         rent_date_start,
         total
     }: IUpdateOrder): Promise<void>
+    updateTime(id: string, days_to_expire_rent: number) : Promise<void>
     finishOrder({ id }: IFinishOrder): Promise<void>
 }
