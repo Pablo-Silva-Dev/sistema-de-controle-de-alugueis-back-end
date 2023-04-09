@@ -60,6 +60,11 @@ export class NotificationsRepository implements INotificationsRepository {
         return notifications
     }
 
+    async findById(id: string): Promise<INotification> {
+        const notification = await this.repository.findOne(id)
+        return notification
+    }
+
 
     async create({ title, content, category }: INotification) {
         const newNotification = this.repository.create({

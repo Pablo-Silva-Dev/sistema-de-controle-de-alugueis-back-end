@@ -10,4 +10,5 @@ export interface INotificationsRepository {
     create: ({ id, title, content, category }: INotification) => Promise<void>;
     update: (id: string, read: boolean) => Promise<void>;
     delete: (id: string) => Promise<void>;
+    findById: (id: string) => Promise<INotification>;
 }
