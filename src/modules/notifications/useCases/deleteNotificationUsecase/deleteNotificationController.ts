@@ -7,6 +7,6 @@ export class DeleteNotificationController {
         const { id } = req.params
         const deleteNotificationUsecase = container.resolve(DeleteNotificationUsecase)
         await deleteNotificationUsecase.execute(id)
-        return res.status(200).json({ message: 'Notification delete with success!' })
+        return res.status(200).json({ message: 'Notification deleted with success!' })
     }
 }
