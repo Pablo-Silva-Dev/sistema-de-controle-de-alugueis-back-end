@@ -2,6 +2,7 @@ import { INotification } from "./notification";
 
 export interface INotificationsRepository {
     list: (itemsPerPage?: number, page?: number) => Promise<INotification[]>;
+    listUnread: (itemsPerPage?: number, page?: number) => Promise<INotification[]>;
     listByCategory: (
         category: string,
         itemsPerPage?: number,

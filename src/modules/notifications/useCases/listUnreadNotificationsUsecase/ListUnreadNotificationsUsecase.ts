@@ -3,15 +3,16 @@ import { NotificationsRepository } from '../../repositories/implementations/noti
 import { INotification } from '../../repositories/interfaces/notification'
 
 @injectable()
-export class ListNotificationsUsecase {
+export class ListUnreadNotificationsUsecase {
     constructor(
         @inject('NotificationsRepository')
         private notificationsRepository: NotificationsRepository
     ) { }
 
     async execute(itemsPerPage?: number, page?: number): Promise<INotification[]> {
-        const paginatedNotifications = (await this.notificationsRepository.list(itemsPerPage, page)).reverse()
-        const notifications = (await this.notificationsRepository.list()).reverse()
+        const paginatedNotifications = (await this.notificationsRepository.listUnread(itemsPerPage, page)).reverse()
+
+        const notifications = (await this.notificationsRepository.listUnread()).reverse()
 
         if (page !== 0) {
             return paginatedNotifications

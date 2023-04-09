@@ -33,6 +33,37 @@ export class NotificationsRepository implements INotificationsRepository {
         return notifications
     }
 
+    
+    async listUnread(itemsPerPage?: number, page?: number) {
+        const notifications = await this.repository.find({
+            where: {
+                read: false
+            }
+        })
+
+        if (!itemsPerPage) {
+            itemsPerPage = 0
+        }
+
+        if (!page) {
+            page = 0
+        }
+
+        const paginatedNotifications = await this.repository.find({
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage,
+            where: {
+                read: false
+            }
+        })
+
+        if (page !== 0) {
+            return paginatedNotifications
+        }
+
+        return notifications
+    }
+
     async listByCategory(
         category: string,
         itemsPerPage?: number,
