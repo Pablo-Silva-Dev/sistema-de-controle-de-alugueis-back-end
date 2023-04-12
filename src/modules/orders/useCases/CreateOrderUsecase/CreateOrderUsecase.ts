@@ -33,8 +33,8 @@ export class CreateOrderUsecase {
         finished = false,
         total,
         items
-    }: IOrder): Promise<void> {
-        await this.ordersRepository.create({
+    }: IOrder): Promise<IOrder> {
+      const order =  await this.ordersRepository.create({
             client_id,
             client_name,
             client_cpf,
@@ -56,5 +56,7 @@ export class CreateOrderUsecase {
             total,
             items
         })
+
+        return order
     }
 }

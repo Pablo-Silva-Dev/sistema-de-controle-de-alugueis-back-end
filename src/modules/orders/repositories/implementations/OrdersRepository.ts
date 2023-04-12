@@ -15,8 +15,8 @@ export class OrdersRepository implements IOrdersRepository {
     public constructor() {
         this.repository = getRepository(Order)
     }
-   async updateTime(id: string, days_to_expire_rent: number): Promise<void> {
-        await this.repository.update(id, {days_to_expire_rent})
+    async updateTime(id: string, days_to_expire_rent: number): Promise<void> {
+        await this.repository.update(id, { days_to_expire_rent })
     }
 
     async update({
@@ -61,7 +61,7 @@ export class OrdersRepository implements IOrdersRepository {
         finished,
         total,
         items
-    }: IOrder): Promise<void> {
+    }: IOrder): Promise<IOrder> {
         const newOrder = await this.repository.create({
             client_id,
             client_name,
@@ -85,8 +85,8 @@ export class OrdersRepository implements IOrdersRepository {
             total,
             items
         })
-        await this.repository.save(newOrder)
-
+        const order = await this.repository.save(newOrder)
+        return order
     }
 
     async list(itemsPerPage?: number, page?: number): Promise<IOrder[]> {

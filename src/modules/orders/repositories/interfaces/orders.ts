@@ -21,7 +21,7 @@ export interface IOrdersRepository {
         rent_date_start,
         rent_date_return,
         total
-    }: IOrder): Promise<void>
+    }: IOrder): Promise<IOrder>
     list(itemsPerPage?: number, page?: number): Promise<IOrder[]>
     listFinishedOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
     listFinishedWithJustificationOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>
