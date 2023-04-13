@@ -14,7 +14,8 @@ export class UpdateOrderUsecase {
         id,
         rent_date_return,
         rent_date_start,
-        total
+        total,
+        last_warning_date
     }: IUpdateOrder): Promise<void> {
 
         const order = await this.ordersRepository.findById(id)
@@ -27,7 +28,8 @@ export class UpdateOrderUsecase {
             id,
             rent_date_return,
             rent_date_start,
-            total
+            total,
+            last_warning_date
         })
     }
 }

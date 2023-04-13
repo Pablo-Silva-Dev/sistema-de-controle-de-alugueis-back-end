@@ -23,9 +23,17 @@ export class OrdersRepository implements IOrdersRepository {
         id,
         rent_date_return,
         rent_date_start,
-        total
+        total,
+        last_warning_date
     }: IUpdateOrder): Promise<void> {
-        await this.repository.update(id, { rent_date_return, rent_date_start, total })
+        await this.repository.update(
+            id,
+            {
+                rent_date_return,
+                rent_date_start,
+                total,
+                last_warning_date
+            })
     }
 
     async finishOrder({ id }: IFinishOrder): Promise<void> {

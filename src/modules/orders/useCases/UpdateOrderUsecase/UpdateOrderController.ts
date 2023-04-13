@@ -8,14 +8,16 @@ export class UpdateOrderController {
         const {
             rent_date_return,
             rent_date_start,
-            total
+            total,
+            last_warning_date
         } = req.body
         const updateOrderUsecase = container.resolve(UpdateOrderUsecase)
         await updateOrderUsecase.execute({
             id,
             rent_date_return,
             rent_date_start,
-            total
+            total,
+            last_warning_date
         })
         return res.status(200).json({ message: 'Order updated successfully.' })
     }

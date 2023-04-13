@@ -24,6 +24,7 @@ export interface IOrder{
     finished: boolean;
     rent_date_start: Date;
     rent_date_return?: Date;
+    last_warning_date?: Date;
     total: number;
     client_id: string;
     items?: IOrderItem[]
@@ -35,6 +36,7 @@ export interface IUpdateOrder{
     rent_date_start?: Date;
     rent_date_return?: Date;
     total?: number;
+    last_warning_date?: Date;
 }
 export interface IFinishOrder{
     id: string;

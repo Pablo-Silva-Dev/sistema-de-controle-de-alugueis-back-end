@@ -61,6 +61,9 @@ class Order {
     @CreateDateColumn()
     rent_date_return?: Date;
     
+    @CreateDateColumn()
+    last_warning_date?: Date;
+    
     @Column()
     total: number
     
