@@ -5,6 +5,7 @@ export interface IUpdateItem {
     description_long: string;
     price: number;
     quantity?: number;
+    last_warning_date?: Date;
 }
 
 export interface IUpdateItemStatus{
@@ -21,6 +22,7 @@ export interface IItemsRepository {
         description,
         description_long,
         price,
+        last_warning_date
     }: IUpdateItem): Promise<void>
     updateItemStock({
         id,

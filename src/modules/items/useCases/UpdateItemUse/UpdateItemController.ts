@@ -8,7 +8,8 @@ export class UpdateItemController {
             description,
             description_long,
             price,
-            quantity
+            quantity,
+            last_warning_date
         } = req.body
 
         const { id } = req.params
@@ -20,7 +21,8 @@ export class UpdateItemController {
             description,
             description_long,
             price,
-            quantity
+            quantity,
+            last_warning_date
         })
         return res.status(201).json({ "message": "Item updated with success." })
     }

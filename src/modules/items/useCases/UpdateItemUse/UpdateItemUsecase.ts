@@ -14,22 +14,24 @@ export class UpdateItemUsecase {
         description,
         description_long,
         price,
-        quantity
-    }: IUpdateItem): Promise<void> {
+        quantity,
+        last_warning_date
+    }: IUpdateItem): Promise < void> {
 
-        const item = await this.itemsRepository.findById(id)
+    const item = await this.itemsRepository.findById(id)
 
-        if (!item) {
-            throw new AppError(404, 'Item not found')
-        }
+        if(!item) {
+        throw new AppError(404, 'Item not found')
+    }
 
         await this.itemsRepository.update({
-            id,
-            description,
-            description_long,
-            price,
-            quantity
-        })
-    }
+        id,
+        description,
+        description_long,
+        price,
+        quantity,
+        last_warning_date
+    })
+}
 
 }

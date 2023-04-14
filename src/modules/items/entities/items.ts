@@ -28,6 +28,9 @@ class Item {
     image?: string;
 
     @CreateDateColumn()
+    last_warning_date?: Date;
+
+    @CreateDateColumn()
     created_at?: Date;
 
     @CreateDateColumn()

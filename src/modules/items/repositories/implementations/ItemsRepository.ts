@@ -14,7 +14,8 @@ export class ItemsRepository implements IItemsRepository {
         description_long,
         price,
         stock,
-        image
+        image,
+        last_warning_date
     }: IItem): Promise<void> {
 
         const imageFullUrl = `${process.env.IMAGE_FULL_URL}/${image}`
@@ -24,7 +25,8 @@ export class ItemsRepository implements IItemsRepository {
             description_long,
             price,
             stock,
-            image: imageFullUrl
+            image: imageFullUrl,
+            last_warning_date
         })
 
         await this.repository.save(item)
@@ -63,13 +65,15 @@ export class ItemsRepository implements IItemsRepository {
         description,
         description_long,
         price,
-        quantity
+        quantity,
+        last_warning_date
     }: IUpdateItem): Promise<void> {
         await this.repository.update(id, {
             description,
             description_long,
             price,
-            quantity
+            quantity,
+            last_warning_date
         })
     }
 

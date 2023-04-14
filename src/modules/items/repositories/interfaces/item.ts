@@ -7,4 +7,5 @@ export interface IItem {
     quantity?: number;
     description_long?: string;
     image?: string;
+    last_warning_date?: Date;
 }
