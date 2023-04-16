@@ -5,7 +5,7 @@ import { IOrdersRepository } from '../../repositories/interfaces/orders';
 import { IClientsRepository } from '../../../clients/repositories/interfaces/clients'
 
 @injectable()
-export class ListOrdersByClietntUsecase {
+export class ListPaginatedOrdersByClient {
     constructor(
         @inject('OrdersRepository')
         private ordersRepository: IOrdersRepository,
@@ -13,12 +13,23 @@ export class ListOrdersByClietntUsecase {
         private clientsRepository: IClientsRepository
     ) { }
 
-    async execute(client_id: string): Promise<IOrder[]> {
+    async execute(client_id: string, itemsPerPage?: number, page?: number): Promise<IOrder[]> {
         const client = await this.clientsRepository.findById(client_id)
         if (!client) {
             throw new AppError(404, 'Client not found.')
         }
-        const orders = await this.ordersRepository.listOrdersByClient(client_id)
+        const paginatedOrders = await this.ordersRepository
+            .listPaginatedOrdersByClient(client_id, itemsPerPage, page)
+        const orders = await this.ordersRepository.listPaginatedOrdersByClient(
+            client_id,
+            itemsPerPage,
+            page
+        )
+
+        if (page !== 0) {
+            return paginatedOrders
+        }
+
         return orders
     }
 }

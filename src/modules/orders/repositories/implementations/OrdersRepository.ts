@@ -298,10 +298,16 @@ export class OrdersRepository implements IOrdersRepository {
         await this.repository.delete({ id })
     }
 
-    async listOrdersByClient(client_id: string): Promise<IOrder[]> {
+    async listPaginatedOrdersByClient(
+        client_id: string,
+        itemsPerPage: number,
+        page: number
+    ): Promise<IOrder[]> {
         const orders = await this.repository.find({
             where: { client_id },
             relations: ['client'],
+            take: itemsPerPage,
+            skip: (page - 1) * itemsPerPage
 
         })
         return orders
