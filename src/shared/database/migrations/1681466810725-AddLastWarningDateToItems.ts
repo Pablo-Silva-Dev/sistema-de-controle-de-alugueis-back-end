@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
+import { MigrationInterface, QueryRunner, TableColumn } from "typeorm";
 
 export class AddLastWarningDateToItems1681466810725 implements MigrationInterface {
 
@@ -6,7 +6,7 @@ export class AddLastWarningDateToItems1681466810725 implements MigrationInterfac
         await queryRunner.addColumn('items', new TableColumn({
             name: 'last_warning_date',
             type: 'timestamp',
-            isNullable: true
+            isNullable: true,
         }))
     }
 

@@ -78,6 +78,9 @@ class Order {
     
     @Column()
     divergence_justification?: string
+    
+    @Column()
+    reminder_order_email_sent: boolean
 
     @ManyToOne(() => Client)
     @JoinColumn({ name: 'client_id' })

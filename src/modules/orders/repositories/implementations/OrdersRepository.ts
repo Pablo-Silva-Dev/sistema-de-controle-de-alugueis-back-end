@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 import dayjs from 'dayjs'
 import { Order } from '../../entities/Order'
-import { IFinishOrder, IOrder, IUpdateOrder } from '../interfaces/order'
+import { IFinishOrder, IOrder, IUpdateOrder, IUpdateOrderSendingEmailStatus } from '../interfaces/order'
 import { IOrdersRepository } from '../interfaces/orders'
 
 export class OrdersRepository implements IOrdersRepository {
@@ -33,6 +33,17 @@ export class OrdersRepository implements IOrdersRepository {
                 rent_date_start,
                 total,
                 last_warning_date
+            })
+    }
+
+    async updateOrderSendingEmailStatus({
+        id,
+        reminder_order_email_sent
+    }: IUpdateOrderSendingEmailStatus): Promise<void> {
+        await this.repository.update(
+            id,
+            {
+                reminder_order_email_sent
             })
     }
 
@@ -68,7 +79,8 @@ export class OrdersRepository implements IOrdersRepository {
         days_to_expire_rent,
         finished,
         total,
-        items
+        items,
+        reminder_order_email_sent
     }: IOrder): Promise<IOrder> {
         const newOrder = await this.repository.create({
             client_id,
@@ -91,7 +103,8 @@ export class OrdersRepository implements IOrdersRepository {
             days_to_expire_rent,
             finished,
             total,
-            items
+            items,
+            reminder_order_email_sent
         })
         const order = await this.repository.save(newOrder)
         return order

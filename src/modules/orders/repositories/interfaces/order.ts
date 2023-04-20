@@ -29,6 +29,7 @@ export interface IOrder{
     client_id: string;
     items?: IOrderItem[]
     divergence_justification?: string
+    reminder_order_email_sent?: boolean;
 }
 
 export interface IUpdateOrder{
@@ -38,7 +39,13 @@ export interface IUpdateOrder{
     total?: number;
     last_warning_date?: Date;
 }
+
 export interface IFinishOrder{
     id: string;
     divergence_justification?: string
+}
+
+export interface IUpdateOrderSendingEmailStatus{
+    id: string;
+    reminder_order_email_sent: boolean;
 }

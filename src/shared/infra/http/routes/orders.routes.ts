@@ -16,6 +16,7 @@ import { FinishOrderController } from '../../../../modules/orders/useCases/Finis
 import { ListFinishedWithJustificationOrdersController } from '../../../../modules/orders/useCases/ListFinishedWithJustificationOrdersUsecase/ListFinishedWithJustificationOrdersController'
 import { FinishOrderWithJustificationController } from '../../../../modules/orders/useCases/FinishOrderWithJustificationUsecase/FinishOrderWithJustificationController'
 import { UpdateOrderTimeController } from '../../../../modules/orders/systemUseCases/UpdateOrderTimeController'
+import { UpdateOrderSendingEmailStatusController } from '../../../../modules/orders/useCases/UpdateOrderEmailSendingStatusUsecase/UpdateOrderEmailSendingStatusController'
 
 export const orderRoutes = Router()
 
@@ -35,6 +36,7 @@ const listNextToExpireOrdersController = new ListNextToExpireOrdersController()
 const finishOrderController = new FinishOrderController()
 const finishOrderWithJustificationController = new FinishOrderWithJustificationController()
 const updateOrderTimeController = new UpdateOrderTimeController()
+const updateOrderSendingEmailStatusController = new UpdateOrderSendingEmailStatusController()
 
 orderRoutes.post(
     '/create',
@@ -114,4 +116,9 @@ orderRoutes.put(
     '/finish-with-justification/:id',
     ensureAuthenticated,
     finishOrderWithJustificationController.handle
+)
+orderRoutes.put(
+    '/update-email-sending-status/:id',
+    ensureAuthenticated,
+    updateOrderSendingEmailStatusController.handle
 )

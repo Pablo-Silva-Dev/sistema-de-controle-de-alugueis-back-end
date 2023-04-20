@@ -20,7 +20,8 @@ export interface IOrdersRepository {
         finished,
         rent_date_start,
         rent_date_return,
-        total
+        total,
+        reminder_order_email_sent
     }: IOrder): Promise<IOrder>
     list(itemsPerPage?: number, page?: number): Promise<IOrder[]>
     listFinishedOrders(itemsPerPage?: number, page?: number): Promise<IOrder[]>

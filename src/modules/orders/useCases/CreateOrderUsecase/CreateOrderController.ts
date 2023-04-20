@@ -21,7 +21,8 @@ export class CreateOrderController {
             rent_date_start,
             rent_date_return,
             total,
-            items
+            items,
+            reminder_order_email_sent
         } = req.body
 
         const finished = false
@@ -51,7 +52,8 @@ export class CreateOrderController {
             finished,
             days_to_expire_rent,
             total_days,
-            items
+            items,
+            reminder_order_email_sent
         })
         return res.status(201).json(order)
     }

@@ -32,7 +32,8 @@ export class CreateOrderUsecase {
         days_to_expire_rent = this.dateProvider.daysToExpireRent(rent_date_return),
         finished = false,
         total,
-        items
+        items,
+        reminder_order_email_sent
     }: IOrder): Promise<IOrder> {
       const order =  await this.ordersRepository.create({
             client_id,
@@ -54,7 +55,8 @@ export class CreateOrderUsecase {
             days_to_expire_rent,
             finished,
             total,
-            items
+            items,
+            reminder_order_email_sent
         })
 
         return order
