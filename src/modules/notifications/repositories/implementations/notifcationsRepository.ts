@@ -11,7 +11,11 @@ export class NotificationsRepository implements INotificationsRepository {
     }
 
     async list(itemsPerPage?: number, page?: number) {
-        const notifications = await this.repository.find()
+        const notifications = await this.repository.find({
+            order:{
+                print_number: 'DESC'
+            }
+        })
 
         if (!itemsPerPage) {
             itemsPerPage = 0
@@ -23,7 +27,10 @@ export class NotificationsRepository implements INotificationsRepository {
 
         const paginatedNotifications = await this.repository.find({
             take: itemsPerPage,
-            skip: (page - 1) * itemsPerPage
+            skip: (page - 1) * itemsPerPage,
+            order: {
+                print_number: 'DESC'
+            }
         })
 
         if (page !== 0) {
@@ -33,11 +40,14 @@ export class NotificationsRepository implements INotificationsRepository {
         return notifications
     }
 
-    
+
     async listUnread(itemsPerPage?: number, page?: number) {
         const notifications = await this.repository.find({
             where: {
-                read: false
+                read: false,
+            },
+            order: {
+                print_number: 'DESC'
             }
         })
 
@@ -53,7 +63,10 @@ export class NotificationsRepository implements INotificationsRepository {
             take: itemsPerPage,
             skip: (page - 1) * itemsPerPage,
             where: {
-                read: false
+                read: false,
+            },
+            order: {
+                print_number: 'DESC'
             }
         })
 
@@ -81,7 +94,10 @@ export class NotificationsRepository implements INotificationsRepository {
 
         const paginatedNotifications = await this.repository.find({
             take: itemsPerPage,
-            skip: (page - 1) * itemsPerPage
+            skip: (page - 1) * itemsPerPage,
+            order:{
+                print_number: 'DESC'
+            }
         })
 
         if (page !== 0) {

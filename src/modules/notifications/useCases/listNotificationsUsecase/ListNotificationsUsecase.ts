@@ -10,8 +10,8 @@ export class ListNotificationsUsecase {
     ) { }
 
     async execute(itemsPerPage?: number, page?: number): Promise<INotification[]> {
-        const paginatedNotifications = (await this.notificationsRepository.list(itemsPerPage, page)).reverse()
-        const notifications = (await this.notificationsRepository.list()).reverse()
+        const paginatedNotifications = (await this.notificationsRepository.list(itemsPerPage, page))
+        const notifications = (await this.notificationsRepository.list())
 
         if (page !== 0) {
             return paginatedNotifications

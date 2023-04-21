@@ -18,6 +18,9 @@ export class Notification {
     @Column()
     read?: boolean;
 
+    @Column()
+    print_number?: number
+
     @CreateDateColumn()
     created_at?: Date;
 
