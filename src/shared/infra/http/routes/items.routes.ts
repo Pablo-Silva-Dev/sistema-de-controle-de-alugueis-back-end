@@ -29,7 +29,7 @@ itemsRoutes.post(
     upload.single('image'),
     createItemController.handle
 )
-itemsRoutes.get('/list', ensureAuthenticated, listItemsController.handle)
+itemsRoutes.get('/list',  listItemsController.handle)
 itemsRoutes.get('/:id', findItemByIdController.handle)
 itemsRoutes.delete('/:id', ensureAuthenticated, deleteItemController.handle)
 itemsRoutes.put('/:id', ensureAuthenticated, updateItemController.handle)
