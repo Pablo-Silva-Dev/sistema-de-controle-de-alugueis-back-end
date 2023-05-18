@@ -13,7 +13,9 @@ import { AppError } from '../../../errors/appError';
 const app = express()
 
 app.use(json())
-app.use(cors())
+app.use(cors({
+    origin: 'https://sistema-de-controle-de-alugueis.pscode.com.br'
+}))
 app.use(routes)
 
 app.use((
