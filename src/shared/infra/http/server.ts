@@ -12,10 +12,11 @@ import { AppError } from '../../../errors/appError';
 
 const app = express()
 
-app.use(json())
 app.use(cors({
     origin: 'https://sistema-de-controle-de-alugueis.pscode.com.br'
 }))
+app.options('*', cors())
+app.use(json())
 app.use(routes)
 
 app.use((
