@@ -30,6 +30,7 @@ export interface IOrder{
     items?: IOrderItem[]
     divergence_justification?: string
     reminder_order_email_sent?: boolean;
+    payment_id: number;
 }
 
 export interface IUpdateOrder{

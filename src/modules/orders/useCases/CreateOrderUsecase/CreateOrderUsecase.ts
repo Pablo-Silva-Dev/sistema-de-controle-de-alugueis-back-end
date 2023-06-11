@@ -33,7 +33,8 @@ export class CreateOrderUsecase {
         finished = false,
         total,
         items,
-        reminder_order_email_sent
+        reminder_order_email_sent,
+        payment_id
     }: IOrder): Promise<IOrder> {
       const order =  await this.ordersRepository.create({
             client_id,
@@ -56,7 +57,8 @@ export class CreateOrderUsecase {
             finished,
             total,
             items,
-            reminder_order_email_sent
+            reminder_order_email_sent,
+            payment_id
         })
 
         return order

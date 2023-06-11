@@ -72,6 +72,9 @@ class Order {
     
     @Column()
     total_days: number
+
+    @Column()
+    payment_id: number
     
     @Column("jsonb", { nullable: true })
     items: IItem[]

@@ -80,7 +80,8 @@ export class OrdersRepository implements IOrdersRepository {
         finished,
         total,
         items,
-        reminder_order_email_sent
+        reminder_order_email_sent,
+        payment_id
     }: IOrder): Promise<IOrder> {
         const newOrder = await this.repository.create({
             client_id,
@@ -104,7 +105,8 @@ export class OrdersRepository implements IOrdersRepository {
             finished,
             total,
             items,
-            reminder_order_email_sent
+            reminder_order_email_sent,
+            payment_id
         })
         const order = await this.repository.save(newOrder)
         return order
